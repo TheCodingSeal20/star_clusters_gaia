@@ -108,13 +108,14 @@ def filter_data(data, cluster_distance, cluster_radius, pm_limit_lower = -30, pm
 		plt.xlim([pm_limit_lower, pm_limit_upper])
 		plt.ylim([pm_limit_lower, pm_limit_upper])
 
-		plt.xlabel("PMRA [mas.yr**-1]")
-		plt.ylabel("PMDEC [mas.yr**-1]")
+		plt.xlabel(r"$\mu_{RA\ }[mas\ {\rm yr}^{-1}]$")
+		plt.ylabel(r"$\mu_{DEC\ }[mas\ {\rm yr}^{-1}]$")
 		
-		pc = plt.pcolormesh(x_d, y_d, density)
-		sc = plt.scatter(filtered_pmra, filtered_pmdec, s=1, c=weighted_probability, cmap=plt.cm.hot)
+		pc = plt.pcolormesh(x_d, y_d, density, cmap=plt.cm.Blues)
+		sc = plt.scatter(filtered_pmra, filtered_pmdec, s=32, c=weighted_probability, cmap=plt.cm.hot)
 		plt.colorbar(sc, label="Membership probability")
-
+		plt.colorbar(pc, label="Normalised weighted point density")
+        
 		plt.show()
 
 	return filtered_data, weighted_probability

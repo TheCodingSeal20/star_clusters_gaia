@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
 
+plt.rcParams.update({'font.size': 15}) 
+
 #%%Files and Folders
 
 cluster = 'NGC 5460'
@@ -48,7 +50,7 @@ def cal_cumfreq(cluster, key, velocity):
     ax.set_ylabel('cumfreq density')
     ax.legend()
 
-    plt.show()
+    plt.tight_layout()
     if save == True:
         plt.savefig(plot_folder + f'{cluster}-{key}.png')
 

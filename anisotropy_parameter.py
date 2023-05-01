@@ -43,14 +43,16 @@ def anisotropy_parameter(data, plot=False, bins=20):
 		#Calculate anisotropy parameter and error for all radii
 		for i in r:
 			r_data = points_in_radius(data, i)
-			r_ap = anisotropy_parameter(r_data, plot=False)
+			r_ap, r_err = anisotropy_parameter(r_data, plot=False)
 			ap_arr = np.append(ap_arr, r_ap)
-			err_arr = np.append(err_arr, 2 * (1-r_ap) * ((1/(r_data.get_data_size()-1))**(1/2)))
+			err_arr = np.append(err_arr, r_err)
 
 		#Plot anisotropy parameter as a function of radius
 		plt.xlabel("r/R")
 		plt.ylabel(r'$\beta = 1-\sigma_t^2/\sigma_r^2$')
-		plt.errorbar(r/max_r, ap_arr, yerr=err_arr)
-
+		plt.errorbar(r/max_r, ap_arr, yerr=err_arr, lw=2)
+		plt.hlines(0, np.min(r/max_r), np.max(r/max_r), ls='--', color='black', lw=2)
+		plt.tight_layout()
+        
 	#Return value
 	return  1 - (np.std(pmt)**2/np.std(pmr)**2), 2 * ((np.std(pmt)**2/np.std(pmr)**2)) * ((1/(data.get_data_size()-1))**(1/2))

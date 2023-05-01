@@ -4,14 +4,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-path = "Data/NGC 5460.json"
+plt.rcParams.update({'font.size': 20})
+
+path = "C:/Users/rhbjo/OneDrive - The University of Nottingham/Shared/Data/NGC 2360.json"
 
 distance_range = (0, 2000)
 
 data = Data(path)
 dist = 1/(data.parallax * 1e-3)
 data.data = data.data[np.logical_and(dist > distance_range[0], dist < distance_range[1]), :]
-centre = np.array([-6.64, -3.36])
+centre = np.array([0.5, 6])
 
 dist = np.sqrt((data.pmra-centre[0])**2 + (data.pmdec-centre[1])**2)
 data.data = data.data[dist < 1, :]
